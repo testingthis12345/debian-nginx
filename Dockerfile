@@ -9,6 +9,8 @@ RUN apt-get update && \
 
 # Copy a custom Nginx config (optional)
 # COPY nginx.conf /etc/nginx/nginx.conf
+COPY default /etc/nginx/sites-available/default
+COPY info.php /var/www/html/info.php
 
 # Expose port 80
 EXPOSE 80

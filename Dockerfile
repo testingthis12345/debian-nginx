@@ -3,7 +3,7 @@ FROM debian:bookworm-slim
 
 # Install Nginx and clean up
 RUN apt-get update && \
-    apt-get install -y nginx && \
+    apt-get install -y nginx php php-fpm && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

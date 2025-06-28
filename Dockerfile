@@ -1,5 +1,5 @@
 # Use official Debian base image
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 # Install Nginx and clean up
 RUN apt-get update && \

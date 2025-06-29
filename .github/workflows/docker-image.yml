@@ -50,11 +50,12 @@ jobs:
 
       - name: Sign Docker image with KMS
         run: |
-          cosign sign --key awskms:///arn:aws:kms:eu-west-1:679007689865:alias/signkey 679007689865.dkr.ecr.eu-west-1.amazonaws.com/debian-nginx:${{ env.IMAGE_TAG }} -d --tlog-upload=false
+          DIGEST=$(aws ecr list-images --repository-name debian-nginx  --filter "tagStatus=TAGGED" --query 'imageIds[?contains(imageTag, `latest`)].imageDigest' --output text)
+          cosign sign --key awskms:///arn:aws:kms:eu-west-1:679007689865:alias/signkey 679007689865.dkr.ecr.eu-west-1.amazonaws.com/debian-nginx:${{ env.DIGEST }} -d --allow-insecure-registry 
 
       - name: Verify Signature
         run: |
-          cosign verify --key awskms:///arn:aws:kms:eu-west-1:679007689865:alias/signkey 679007689865.dkr.ecr.eu-west-1.amazonaws.com/debian-nginx:${{ env.IMAGE_TAG }}
+          cosign verify --key awskms:///arn:aws:kms:eu-west-1:679007689865:alias/signkey 679007689865.dkr.ecr.eu-west-1.amazonaws.com/debian-nginx:${{ env.DIGEST }}
          
       - name: Update kubeconfig
         run: |

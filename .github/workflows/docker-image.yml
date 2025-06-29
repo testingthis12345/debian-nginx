@@ -44,6 +44,9 @@ jobs:
           echo "Pushed image to ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}"
           MANIFEST=$(aws ecr batch-get-image --repository-name debian-nginx --image-ids imageTag=${{ env.IMAGE_TAG }} --query 'images[].imageManifest' --output text)
           aws ecr put-image --repository-name debian-nginx --image-tag latest --image-manifest "$MANIFEST"
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3.5.0
          
       - name: Update kubeconfig
         run: |

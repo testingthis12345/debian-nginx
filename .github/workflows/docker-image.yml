@@ -57,7 +57,7 @@ jobs:
 
       - name: Verify Signature
         run: |
-          cosign verify --key awskms:///arn:aws:kms:eu-west-1:679007689865:alias/signkey 679007689865.dkr.ecr.eu-west-1.amazonaws.com/debian-nginx@${{ env.DIGEST }}
+          cosign verify --key awskms:///arn:aws:kms:eu-west-1:679007689865:alias/signkey 679007689865.dkr.ecr.eu-west-1.amazonaws.com/debian-nginx@${DIGEST}
          
       - name: Update kubeconfig
         run: |

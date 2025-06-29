@@ -17,4 +17,4 @@ EXPOSE 80
 
 # Start Nginx in the foreground
 #CMD ["nginx", "-g", "daemon off;"]
-CMD ["/bin/bash", "-c", "php-fpm8.2 && chmod 755 /usr/share/nginx/html/* && nginx -g 'daemon off;'"]
+CMD ["/bin/bash", "-c", "php-fpm8.2 && chmod 755 /var/www/html/* && nginx -g 'daemon off;'"]
